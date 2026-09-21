@@ -1,0 +1,13 @@
+# Don't let visitors list folder contents.
+Options -Indexes
+
+# These files aren't meant to be loaded directly in a browser.
+<FilesMatch "^(schema\.sql|README\.md)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>

@@ -1,0 +1,351 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;800&display=swap');
+
+:root {
+    --cream: #FFFBF0;
+    --navy: #233752;
+    --sun: #FFC93C;
+    --sky: #3FBFE0;
+    --coral: #FF6F5E;
+    --grass: #6BCB77;
+    --card-shadow: 0 6px 0 rgba(35, 55, 82, 0.15);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--navy);
+    font-family: 'Nunito', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.kid-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 22px 16px 10px;
+}
+
+.kid-header .header-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: 3px solid var(--sun);
+    box-shadow: var(--card-shadow);
+    display: block;
+}
+
+.kid-header h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.category-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 6px 16px 20px;
+}
+
+.category-pill {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.05rem;
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: none;
+    background: white;
+    color: var(--navy);
+    box-shadow: var(--card-shadow);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.category-pill.active {
+    background: var(--sky);
+    color: white;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 24px;
+    padding: 10px 24px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.video-card {
+    background: white;
+    border-radius: 22px;
+    box-shadow: var(--card-shadow);
+    text-decoration: none;
+    color: var(--navy);
+    overflow: hidden;
+    display: block;
+    transition: transform 0.12s ease;
+}
+
+.video-card:active {
+    transform: scale(0.97);
+}
+
+.thumb-wrap {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #dde6ef;
+}
+
+.thumb-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.play-badge {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-badge svg {
+    width: 56px;
+    height: 56px;
+    filter: drop-shadow(0 3px 4px rgba(0,0,0,0.35));
+}
+
+.video-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.15rem;
+    padding: 14px 16px 18px;
+    line-height: 1.25;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.4rem;
+    color: var(--navy);
+}
+
+.watch-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.2rem;
+    background: var(--coral);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 18px;
+}
+
+.player-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    background: black;
+}
+
+.player-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.player-wrap video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: black;
+}
+
+.photo-wrap {
+    width: 100%;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    background: #12212f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 80vh;
+}
+
+.photo-wrap img {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    object-fit: contain;
+}
+
+.watch-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.5rem;
+    margin: 18px 4px 0;
+}
+
+.watch-nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 12px;
+}
+
+.watch-nav-btn {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.1rem;
+    background: white;
+    color: var(--navy);
+    padding: 12px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: var(--card-shadow);
+}
+
+.watch-nav-btn.next {
+    background: var(--sky);
+    color: white;
+}
+
+.swipe-hint {
+    text-align: center;
+    color: #9aa7b8;
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+.fullscreen-toggle-btn {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 100;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    color: var(--navy);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.fullscreen-toggle-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.fullscreen-toggle-btn .icon-compress {
+    display: none;
+}
+
+.fullscreen-toggle-btn.is-fullscreen .icon-expand {
+    display: none;
+}
+
+.fullscreen-toggle-btn.is-fullscreen .icon-compress {
+    display: block;
+}
+
+.parent-gate {
+    text-align: center;
+    padding: 20px 0 30px;
+}
+
+.parent-gate a {
+    color: #9aa7b8;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.gate-wrap {
+    max-width: 380px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.gate-card {
+    background: white;
+    border-radius: 22px;
+    box-shadow: var(--card-shadow);
+    padding: 28px 24px;
+    text-align: center;
+}
+
+.gate-hint {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.1rem;
+    margin: 0 0 18px;
+}
+
+.gate-error {
+    background: #FFE9E6;
+    color: #C0392B;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+}
+
+.gate-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.gate-card input[type="password"] {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 2px solid #dde6ef;
+    text-align: center;
+}
+
+.gate-remember {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--navy);
+}
+
+.unlock-btn {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.2rem;
+    background: var(--grass);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: var(--card-shadow);
+}

@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --bg: #F5F7FA;
+    --ink: #1F2937;
+    --muted: #6B7280;
+    --line: #E3E8EF;
+    --brand: #3B6FE0;
+    --danger: #E0503B;
+    --ok: #2FA35A;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+}
+
+.admin-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+}
+
+.admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.admin-header h1 {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.admin-header a, .btn {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--brand);
+}
+
+.btn {
+    display: inline-block;
+    background: var(--brand);
+    color: white !important;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn.secondary {
+    background: white;
+    color: var(--brand) !important;
+    border: 1px solid var(--line);
+}
+
+.btn.danger {
+    background: var(--danger);
+}
+
+.card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+.field {
+    margin-bottom: 16px;
+}
+
+.field label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+}
+
+.field input, .field select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.media-item {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.media-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    background: #eef1f5;
+}
+
+.media-info {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.media-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+.media-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+.media-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.media-actions form {
+    display: inline;
+}
+
+.media-actions .btn {
+    font-size: 0.82rem;
+    padding: 8px 14px;
+}
+
+.tag {
+    display: inline-block;
+    background: #EEF2FF;
+    color: var(--brand);
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.tab-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+}
+
+.tab {
+    padding: 10px 16px;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+}
+
+.tab.active {
+    color: var(--brand);
+    border-bottom-color: var(--brand);
+}
+
+.hint {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0;
+}
+
+.status-on { color: var(--ok); font-weight: 600; }
+.status-off { color: var(--muted); font-weight: 600; }
+
+.alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    font-size: 0.9rem;
+}
+
+.alert.error { background: #FDEAE7; color: var(--danger); }
+.alert.success { background: #E9F7EE; color: var(--ok); }
+
+.login-box {
+    max-width: 360px;
+    margin: 80px auto;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px;
+}
+
+.login-box h1 {
+    font-size: 1.3rem;
+    margin-top: 0;
+}
+
+.row-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.row-actions form {
+    display: inline;
+}
+
+/* --- Mobile adjustments --- */
+@media (max-width: 560px) {
+    .admin-wrap {
+        padding: 20px 14px 50px;
+    }
+
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .admin-header h1 {
+        font-size: 1.2rem;
+    }
+
+    .row-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .media-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tab-row {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .login-box {
+        margin: 40px auto;
+        padding: 24px;
+    }
+}

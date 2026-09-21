@@ -1,0 +1,10 @@
+# These files are only ever require()'d by other PHP scripts, never loaded
+# directly - this just adds a second layer of protection in case Apache's
+# PHP handler is ever misconfigured.
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>
