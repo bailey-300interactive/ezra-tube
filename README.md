@@ -7,7 +7,7 @@ specifically approved. Three ways to add content:
 - **Upload your own video files** (MP4, MOV, WebM, M4V)
 - **Upload your own photos** (JPG, PNG, GIF, WebP)
 
-- **Kid side** (`index.php`, `watch.php`): a password gate (separate from
+- **Kid side** (`index.php`, `watch.php`, `reels.php`): a password gate (separate from
   the admin login, meant for a grown-up to unlock once per device — see
   below) in front of big colorful cards, swipeable browsing between items,
   nothing but what you've approved.
@@ -184,6 +184,31 @@ config constants.
   left/right (or use arrow keys) to move to the next/previous approved item
   without going back to the grid. If they opened it from a filtered
   category, swiping stays within that category.
+- **Reels mode (swipe up, like Instagram Reels / TikTok)**: the yellow
+  **Swipe & watch** button on the home page (or **Swipe mode** on any watch
+  page) opens `reels.php`, a full-screen feed with one item per screen.
+  Swipe up for the next one, down to go back. The video on screen plays by
+  itself and loops, the one you swiped away from stops, and the next one is
+  already loading so it starts straight away. Tap to pause or play, 🔇 turns
+  the sound off, 🏠 goes back to the grid. Photos show full screen on a
+  blurred copy of themselves, and so do landscape videos on a portrait iPad.
+  It follows the same order as the home grid, stays inside a category if
+  you opened it from one, and never runs out: after the last item it starts
+  again from the top. Arrow keys, Page Up/Down and space work on a computer.
+  - The first screen says **Tap to watch!** That tap is what lets Safari play
+    videos with sound (iPads won't autoplay with sound otherwise), and it
+    also switches to full screen. Because Reels is a single page, full screen
+    and sound **stay on** while he swipes, unlike moving between watch pages
+    (see "Fullscreen mode" below).
+  - If a browser still refuses sound, the video plays quietly and the 🔇
+    button wiggles in yellow; one tap on it turns the sound on.
+  - The address updates as he swipes (`reels.php?id=12`), so a reload or a
+    Home Screen bookmark opens on the same video.
+  - YouTube items (if `ENABLE_YOUTUBE` is on) appear too, and start when
+    they're on screen. They play inside YouTube's own player, so the
+    link-off caveat above still applies.
+  - No database changes and no new settings: it reads the same `media`
+    table and only shows active items.
 - **Mobile-friendly admin dashboard**: the media list is a responsive card
   grid rather than a wide table, so it's usable on a phone screen without
   side-scrolling.
@@ -203,9 +228,8 @@ config constants.
   The app makes a best-effort attempt to silently re-enter fullscreen on the
   next page automatically, but browsers may block that (fullscreen normally
   requires a fresh tap/click) - if so, it just quietly does nothing and the
-  button is right there to tap again. There's no reliable way around this
-  restriction without turning the whole site into a single-page JS app,
-  which is a much bigger change than this project takes on.
+  button is right there to tap again. Reels mode (`reels.php`) avoids
+  this because it's a single page: once it's full screen it stays that way.
   On iOS Safari specifically, generic fullscreen support is inconsistent
   across versions — if the button doesn't appear at all there, that's this
   script detecting it isn't supported rather than a bug. "Add to Home
