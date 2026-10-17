@@ -39,6 +39,15 @@ $items = $stmt->fetchAll();
     <h1><?= h(SITE_NAME) ?></h1>
 </div>
 
+<?php if (!empty($items)): ?>
+<div class="reels-launch-row">
+    <a class="reels-launch" href="reels.php<?= $category !== '' ? '?category=' . urlencode($category) : '' ?>">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 9.5 14.5 12l-4 2.5z" fill="currentColor"/></svg>
+        Swipe &amp; watch
+    </a>
+</div>
+<?php endif; ?>
+
 <?php if (count($categories) > 1): ?>
 <div class="category-row">
     <a class="category-pill <?= $category === '' ? 'active' : '' ?>" href="index.php">All</a>

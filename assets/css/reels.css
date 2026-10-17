@@ -1,0 +1,313 @@
+/* Ezra Tube - Reels mode (reels.php). Builds on kid.css's colours and fonts. */
+
+html:has(body.reels-body),
+body.reels-body {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
+body.reels-body {
+    background: #000;
+    color: white;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* ---- the feed ---------------------------------------------------------- */
+
+.reels {
+    position: fixed;
+    inset: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;          /* swipe up/down only: no pinch, no sideways */
+    scrollbar-width: none;
+}
+
+.reels::-webkit-scrollbar { display: none; }
+
+.reel {
+    position: relative;
+    height: 100vh;
+    height: 100dvh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;     /* one swipe = one video, like Reels */
+    overflow: hidden;
+    background: #0d1722;
+    cursor: pointer;
+}
+
+/* A blurred, darker copy of the thumbnail fills the edges around a video or
+   photo that doesn't match the screen's shape. */
+.reel-bg {
+    position: absolute;
+    inset: -60px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(30px) brightness(0.5) saturate(1.2);
+    transform: scale(1.1);
+}
+
+.reel-stage {
+    position: absolute;
+    inset: 0;
+}
+
+.reel-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;         /* taps go to the slide (pause / play) */
+    -webkit-user-drag: none;
+}
+
+.reel-video { background: transparent; }
+
+.reel-youtube {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(100%, calc(100dvh * 16 / 9));
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 18px;
+    background: #000;
+}
+
+/* ---- title and progress ------------------------------------------------ */
+
+.reel-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 70px 22px calc(26px + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    pointer-events: none;
+}
+
+.reel-title {
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: clamp(1.3rem, 4.5vw, 2rem);
+    line-height: 1.15;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    max-width: 80%;
+}
+
+.reel-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: env(safe-area-inset-bottom);
+    height: 6px;
+    background: rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+}
+
+.reel-progress span {
+    display: block;
+    height: 100%;
+    background: var(--sun);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.25s linear;
+}
+
+/* ---- pause / play pop -------------------------------------------------- */
+
+.reel-flash {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 120px;
+    margin: -60px 0 0 -60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--coral);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.reel-flash svg { width: 64px; height: 64px; display: none; }
+.reel-flash.show-play .flash-play,
+.reel-flash.show-pause .flash-pause { display: block; }
+.reel-flash.pop { animation: reel-pop 0.7s ease-out forwards; }
+
+/* While paused, keep a big play button showing so he knows to tap. */
+.reel.is-paused .reel-flash {
+    animation: none;
+    opacity: 1;
+    transform: none;
+}
+.reel.is-paused .reel-flash .flash-pause { display: none; }
+.reel.is-paused .reel-flash .flash-play { display: block; }
+
+@keyframes reel-pop {
+    0%   { opacity: 0; transform: scale(0.6); }
+    25%  { opacity: 1; transform: scale(1.05); }
+    70%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.1); }
+}
+
+/* ---- buttons on top ---------------------------------------------------- */
+
+.reels-btn {
+    position: fixed;
+    top: calc(14px + env(safe-area-inset-top));
+    z-index: 100;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: white;
+    color: var(--navy);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.reels-btn svg { width: 24px; height: 24px; }
+
+.reels-home {
+    left: calc(14px + env(safe-area-inset-left));
+    background: var(--coral);
+    color: white;
+}
+
+/* Sits just left of fullscreen.js's button (top-right). */
+.reels-mute { right: calc(74px + env(safe-area-inset-right)); }
+.reels-mute .icon-muted { display: none; }
+.reels-mute.is-muted .icon-sound { display: none; }
+.reels-mute.is-muted .icon-muted { display: block; }
+.reels-mute.needs-tap { animation: reel-wiggle 1.2s ease-in-out 4; background: var(--sun); }
+
+body.reels-body .fullscreen-toggle-btn {
+    top: calc(14px + env(safe-area-inset-top));
+    right: calc(14px + env(safe-area-inset-right));
+}
+
+@keyframes reel-wiggle {
+    0%, 100% { transform: rotate(0); }
+    20% { transform: rotate(-14deg) scale(1.1); }
+    40% { transform: rotate(12deg) scale(1.1); }
+    60% { transform: rotate(-8deg); }
+    80% { transform: rotate(5deg); }
+}
+
+/* ---- "Tap to watch" ---------------------------------------------------- */
+
+.reels-start {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: radial-gradient(circle at 50% 35%, #2f4b70, var(--navy) 70%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    transition: opacity 0.35s ease, visibility 0.35s;
+    cursor: pointer;
+}
+
+.reels-start.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.reels-start-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--sun);
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
+}
+
+.reels-start h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2.2rem;
+    margin: 4px 0 18px;
+}
+
+.reels-start-btn {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: none;
+    background: var(--sun);
+    color: var(--coral);
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 0 10px;
+    cursor: pointer;
+    animation: reel-breathe 1.8s ease-in-out infinite;
+}
+
+.reels-start-btn svg { width: 76px; height: 76px; }
+.reels-start-btn:active { transform: scale(0.94); }
+
+.reels-start p {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.4rem;
+    margin: 18px 0 0;
+    opacity: 0.85;
+}
+
+@keyframes reel-breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.07); }
+}
+
+/* ---- "Swipe up for more!" ---------------------------------------------- */
+
+.reels-hint {
+    position: fixed;
+    left: 50%;
+    bottom: calc(110px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.3rem;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.reels-hint.show { opacity: 1; }
+.reels-hint-hand { font-size: 3rem; animation: reel-swipe-up 1.3s ease-in-out infinite; }
+
+@keyframes reel-swipe-up {
+    0%   { transform: translateY(30px); opacity: 0; }
+    30%  { opacity: 1; }
+    100% { transform: translateY(-40px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reels-start-btn, .reels-hint-hand, .reels-mute.needs-tap { animation: none; }
+}

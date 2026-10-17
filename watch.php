@@ -66,7 +66,13 @@ if ($item['content_type'] === 'youtube' && ENABLE_YOUTUBE) {
 </head>
 <body>
 <div class="watch-page" id="watch-swipe-area">
-    <a class="back-btn" href="index.php<?= $category !== '' ? '?category=' . urlencode($category) : '' ?>">&larr; Back</a>
+    <div class="watch-top-row">
+        <a class="back-btn" href="index.php<?= $category !== '' ? '?category=' . urlencode($category) : '' ?>">&larr; Back</a>
+        <a class="reels-launch" href="reels.php?id=<?= (int) $item['id'] ?><?= $category_qs ?>">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 9.5 14.5 12l-4 2.5z" fill="currentColor"/></svg>
+            Swipe mode
+        </a>
+    </div>
 
     <?php if ($item['content_type'] === 'youtube'): ?>
         <div class="player-wrap">

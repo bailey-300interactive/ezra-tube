@@ -349,3 +349,37 @@ body {
     cursor: pointer;
     box-shadow: var(--card-shadow);
 }
+
+/* ---- Reels mode buttons (reels.php has its own reels.css) ---- */
+.reels-launch-row {
+    display: flex;
+    justify-content: center;
+    padding: 4px 16px 16px;
+}
+
+.reels-launch {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.25rem;
+    background: var(--sun);
+    color: var(--navy);
+    padding: 12px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: var(--card-shadow);
+}
+
+.reels-launch svg { width: 24px; height: 24px; }
+.reels-launch:active { transform: scale(0.96); }
+
+.watch-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding-right: 62px; /* room for the fullscreen button */
+}
+
+.watch-top-row .reels-launch { font-size: 1.1rem; padding: 12px 20px; }
